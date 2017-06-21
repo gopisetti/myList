@@ -10,6 +10,7 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 var MongoClient = require('mongodb').MongoClient
     , mydb = require('assert');
 
+app.use(express.static(__dirname + '/public'));
 
 var url = 'mongodb://localhost:27017/mydb';
 // Use connect method to connect to the Server
@@ -66,6 +67,7 @@ app.post('/add', urlencodedParser, function (req, res) {
         var ary = selectedHospital.split(" ");
         // myListAdd
         // check for duplicates
+        console.log(ary);
         database.collection('myList').insertOne({
             "Name": ary[0],
             "Floor": ary[1],

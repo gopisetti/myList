@@ -3,42 +3,40 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/myList.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>
 </head>
-<body>
 
-<form method="post" enctype="application/x-www-form-urlencoded">
-    <fieldset>
-        <legend>Hospitals</legend>
-        <div id="container">
-            <input list="hospitalsList" name="hospitals" id="hospitalName">
-            <datalist id="hospitalsList">
-                <% for(var i = 0; i < hospitalsList.length; i++) { %>
-                <option><span><%= hospitalsList[i].Name %></span> <span><%= hospitalsList[i].Floor %></span>
-                    <span><%= hospitalsList[i].Phone %></span></option>
-                <% } %>
-            </datalist>
+<div class="container">
+    <h2>Hospitals</h2>
+    <form method="post" enctype="application/x-www-form-urlencoded">
+        <input list="hospitalsList" name="hospitals" id="hospitalName" data-toggle="tooltip" title="Select Hospital and Click Add to My List">
+        <datalist id="hospitalsList">
+            <% for(var i = 0; i < hospitalsList.length; i++) { %>
+            <option><span><%= hospitalsList[i].Name %></span> <span><%= hospitalsList[i].Floor %></span>
+                <span><%= hospitalsList[i].Phone %></span></option>
+            <% } %>
+        </datalist>
+        <button id="btnAddToMyList" type="submit" formaction="/add">Add to My List</button>
+    </form>
+</div>
 
-            <div>
-                <button type="submit" formaction="http://localhost:3000/add">Add</button>
-                <button type="submit" formaction="http://localhost:3000/new">New</button>
-            </div>
-
+<div class="container">
+    <h2>New Hospital</h2>
+    <form method="post" enctype="application/x-www-form-urlencoded">
+        <div class="form-group">
+            <input type="text" placeholder="Name" name="Name">
+            <input type="text" placeholder="Floor" name="Floor">
+            <input type="text" placeholder="Phone" name="Phone">
+            <button id="btnNew" type="submit"  formaction="/new">New</button>
         </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Create New</legend>
-        <div><input type="text" placeholder="Name" name="Name"></div>
-        <div><input type="text" placeholder="Floor" name="Floor"></div>
-        <div><input type="text" placeholder="Phone" name="Phone"></div>
-    </fieldset>
-
-    <fieldset>
-        <legend>My List</legend>
+    </form>
+</div>
+<div class="container">
+    <h2>My List</h2>
+    <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -48,16 +46,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="myList">
-                <% for(var i = 0; i < myList.length; i++) { %>
+            <% for(var i=0; i<myList.length; i++) {%>
+            <tr class = "myList">
                 <td><%= myList[i].Name %></td>
-                <td><%= myList[i].Floor %></td>
-                <td><%= myList[i].Phone %></td>
+                <td>   <%= myList[i].Floor %></td>
+                <td>   <%= myList[i].Phone %></td>
             </tr>
             <% } %>
             </tbody>
         </table>
-    </fieldset>
+    </div>
+</div>
 </form>
 </body>
 </html>
