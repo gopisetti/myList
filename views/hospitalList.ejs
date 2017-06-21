@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>
+</head>
+<body>
+
+
+<form method="post" enctype="application/x-www-form-urlencoded">
+    <div class="panel panel-default">
+    <fieldset>
+        <legend>Hospitals</legend>
+    <div id="container">
+        <input list="hospitalsList" name="hospitals" id="hospitalName">
+        <datalist id="hospitalsList">
+            <% for(var i=0; i<hospitalsList.length; i++) {%>
+                <option> <span><%= hospitalsList[i].Name %></span> <span><%= hospitalsList[i].Floor %></span> <span><%= hospitalsList[i].Phone %></span> </option>
+            <% } %>
+        </datalist>
+
+        <div><button type="submit" formaction="http://localhost:3000/add">Add</button>
+        <button type="submit"  formaction="http://localhost:3000/new">New</button> </div>
+
+    </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Create New</legend>
+    <div><input type="text" placeholder="Name" name="Name"></div>
+               <div><input type="text" placeholder="Floor" name="Floor"></div>
+              <div><input type="text" placeholder="Phone" name="Phone"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>My List</legend>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Floor</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class = "myList">
+                <% for(var i=0; i<myList.length; i++) {%>
+                <td><%= myList[i].Name %></td>
+                <td>   <%= myList[i].Floor %></td>
+                <td>   <%= myList[i].Phone %></td>
+                </tr>
+                <% } %>
+        <ul class="myList" >
+            <% for(var i=0; i<myList.length; i++) {%>
+            <li class="ml">
+                <span><%= myList[i].Name %></span> &nbsp; <span><%= myList[i].Floor %></span> &nbsp;<span><%= myList[i].Phone %></span>
+            </li>
+            <% } %>
+        </ul>
+    </fieldset>
+
+<</div>
+
+</form>
+</body>
+</html>
