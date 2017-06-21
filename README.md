@@ -1,7 +1,7 @@
 # myList
 
 ## Installation
-  clone the project (https://github.com/gopisetti/myList.git)
+ clone the project (https://github.com/gopisetti/myList.git)
   once cloned, on Terminal navigate into project directory,  do npm install for installing all the project dependencies
   run node app.js to get application running on local host
   go to localhost:3000
