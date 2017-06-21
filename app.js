@@ -68,11 +68,8 @@ app.post('/add', urlencodedParser, function (req, res) {
         // myListAdd
         // check for duplicates
         console.log(ary);
-        database.collection('myList').insertOne({
-            "Name": ary[0],
-            "Floor": ary[1],
-            "Phone": ary[2]
-        }, function (err, result) {
+        database.collection('myList').update({"Name":ary[0], "Floor": ary[1], "Phone": ary[2]}, {"Name":ary[0], "Floor": ary[1], "Phone": ary[2]}, {upsert: true},
+            function(err, result){
             if (err) {
                 console.log("error inserting myList ");
             } else {
