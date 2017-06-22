@@ -9,13 +9,40 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>
 </head>
 
+<script>
+    function checkFormValues(){
+        var name = document.getElementById('name').value;
+        var floor = document.getElementById('floor').value;
+
+        if(name === ""){
+            alert("please enter a valid name!");
+            return false;
+        }
+        if(floor === ""){
+            alert("please enter a valid floor!");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script>
+    function checkSelected(){
+        if(selected === ''){
+            alert("please pick a hospital name to add to MyList !");
+            return false;
+        }
+        return true;
+}
+</script>
+
 <div class="container">
     <h2>Hospitals</h2>
-    <form method="post" enctype="application/x-www-form-urlencoded">
+    <form method="post" enctype="application/x-www-form-urlencoded" onsubmit="return checkSelected();">
         <input list="hospitalsList" name="hospitals" id="hospitalName" data-toggle="tooltip" title="Select Hospital and Click Add to My List">
         <datalist id="hospitalsList">
             <% for(var i = 0; i < hospitalsList.length; i++) { %>
-            <option><span><%= hospitalsList[i].Name %></span> <span><%= hospitalsList[i].Floor %></span>
+            <option data-id=i><span><%= hospitalsList[i].Name %></span> <span><%= hospitalsList[i].Floor %></span>
                 <span><%= hospitalsList[i].Phone %></span></option>
             <% } %>
         </datalist>
@@ -25,11 +52,11 @@
 
 <div class="container">
     <h2>New Hospital</h2>
-    <form method="post" enctype="application/x-www-form-urlencoded">
+    <form method="post" enctype="application/x-www-form-urlencoded" onsubmit="return checkFormValues();">
         <div class="form-group">
-            <input type="text" placeholder="Name" name="Name">
-            <input type="text" placeholder="Floor" name="Floor">
-            <input type="text" placeholder="Phone" name="Phone">
+            <input id="name" type="text" placeholder="Name" name="Name">
+            <input id="floor" type="text" placeholder="Floor" name="Floor">
+            <input id="phone" type="tel" pattern="^\d{3}-\d{3}-\d{4}$" placeholder="Phone" name="Phone" oninvalid="setCustomValidity('please enter the pattern  XXX-XXX-XXXX ')" >
             <button id="btnNew" type="submit"  formaction="/new">New</button>
         </div>
     </form>
